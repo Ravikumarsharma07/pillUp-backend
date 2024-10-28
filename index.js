@@ -10,12 +10,12 @@ const api_token = process.env.API_TOKEN;
 
 const allowedOrigins = [
   'https://pill-up-clone.vercel.app',
-  'http://localhost:3000'  
+  'https://localhost:3000'  
 ];
 
 const corsOptions = { 
   origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin) || !origin) {
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -24,6 +24,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions)); 
+
+
+
 
 app.get('/api/blogs', async (req, res) => {
     try {
