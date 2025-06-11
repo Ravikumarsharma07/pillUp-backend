@@ -10,12 +10,12 @@ const api_token = process.env.API_TOKEN;
 
 const allowedOrigins = [
   'https://pill-up-clone.vercel.app',
-  'https://localhost:3000'  
+  'http://localhost:3000'  
 ];
 
 const corsOptions = { 
   origin: (origin, callback) => {
-    if (allowedOrigins.includes(origin)) {
+    if (allowedOrigins.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -44,7 +44,7 @@ app.get('/api/blogs', async (req, res) => {
         res.json(data);
       } catch (error) {
         console.error('Error fetching data from HubSpot:', error.message);
-        res.status(500).json({ error: 'Failed to fetch data from HubSpot' });
+        res.json([]);
       }
       
 });
